@@ -1,0 +1,40 @@
+.accordion {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+/* Remove default marker */
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Style the summary */
+.accordion summary {
+  background-color: #fff;
+  padding: 10px 15px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Add an arrow indicator */
+.accordion summary::before {
+  content: "\25B6"; /* right-pointing arrow */
+  position: absolute;
+  left: 10px;
+  transition: transform 0.2s;
+}
+
+/* Rotate the arrow when open */
+.accordion[open] summary::before {
+  transform: rotate(90deg);
+}
+
+/* Content style */
+.accordion .content {
+  background-color: #fff;
+  padding: 15px;
+}
+
