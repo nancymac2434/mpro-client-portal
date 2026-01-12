@@ -528,7 +528,11 @@ function mpro_breadcrumbs_shortcode() {
     
     // Always start from the *queried* object, not global $post
     $queried_id  = get_queried_object_id();
-    $breadcrumb  = '<nav class="breadcrumb" style="margin-bottom: 1em;">';
+    $breadcrumb  = '<nav class="breadcrumb" style="background: white; padding: 1em; margin-bottom: 1em; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">';
+
+    // Add back and forward buttons
+    $breadcrumb .= '<button onclick="window.history.back()" style="background: none; border: 1px solid #ddd; padding: 0.25em 0.5em; margin-right: 0.5em; cursor: pointer; border-radius: 3px; color: #2271b1;" title="Go back">&lt;</button>';
+    $breadcrumb .= '<button onclick="window.history.forward()" style="background: none; border: 1px solid #ddd; padding: 0.25em 0.5em; margin-right: 1em; cursor: pointer; border-radius: 3px; color: #2271b1;" title="Go forward">&gt;</button>';
 
     if ( is_category() || is_single() ) {
         $categories = get_the_category();
@@ -592,8 +596,9 @@ function render_client_spreadsheets( $client_id ) {
         <p>
         We recommend:
         <ul>
-        <li>Meet with the MentorPRO team daily for 10-15 min after going live to ensure that everyone has access and the Program Staff feels confident to use the app.</li>
-            <li>Meet bi-weekly or monthly to review results and create strategies to achieve your program’s goals.</li>
+        <li><a href="https://meetings.hubspot.com/megyn/megyn" target="_blank">Book a check-in meeting</a> with the MentorPRO team after going live to ensure that everyone has access and that the Program Staff feels confident using the platform. This is also a great opportunity to address any last-minute questions!
+        </li>
+        <li>After that, we recommend meeting monthly, or at a cadence that works best for your program, to review results and collaborate on strategies to achieve your program's goals.</li>
         </ul>
         </p>
         <p>If you have any questions, please reach out to <a href="mailto:support@mentorpro.com">our support team.</a>
