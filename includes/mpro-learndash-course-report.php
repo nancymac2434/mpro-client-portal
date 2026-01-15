@@ -54,6 +54,15 @@ function mpro_learndash_client_report_shortcode( $atts ) {
             }
         }
 
+        // Also include groups the user is directly enrolled in (e.g., program manager group)
+        $user_id = get_current_user_id();
+        if ( $user_id && function_exists( 'learndash_get_users_group_ids' ) ) {
+            $user_groups = learndash_get_users_group_ids( $user_id );
+            if ( ! empty( $user_groups ) && is_array( $user_groups ) ) {
+                $groups_ids = array_unique( array_merge( $groups_ids, array_map( 'intval', $user_groups ) ) );
+            }
+        }
+
         if ( empty( $groups_ids ) ) {
             // Helpful hint for setup issues
             return '<p>No LearnDash group configured for client: <strong>' . esc_html( $client_id ) . '</strong>.</p>';
@@ -93,7 +102,9 @@ function mpro_learndash_client_report_shortcode( $atts ) {
                     $html = '<ol>';
                     if ( ! empty( $course_ids ) && is_array( $course_ids ) ) {
                         foreach ( $course_ids as $course_id ) {
-                            $html .= '<li>' . esc_html( get_the_title( $course_id ) ) . '</li>';
+                            $course_url = get_permalink( $course_id );
+                            $course_title = get_the_title( $course_id );
+                            $html .= '<li><a href="' . esc_url( $course_url ) . '">' . esc_html( $course_title ) . '</a></li>';
                         }
                     } else {
                         $html .= '<li><em>No courses assigned</em></li>';
